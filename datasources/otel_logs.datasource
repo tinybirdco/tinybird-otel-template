@@ -5,7 +5,7 @@ DESCRIPTION >
 
 SCHEMA >
     `Timestamp` DateTime64(9) `json:$.timestamp` CODEC(Delta(8), ZSTD(1)),
-	`TimestampTime` DateTime `json:$.timestamp`,
+    `TimestampTime` DateTime `json:$.timestamp`,
     `TraceId` String `json:$.trace_id` CODEC(ZSTD(1)),
     `SpanId` String `json:$.span_id` CODEC(ZSTD(1)),
     `TraceFlags` UInt8 `json:$.flags` CODEC(ZSTD(1)),
@@ -30,9 +30,9 @@ ENGINE_SETTINGS index_granularity=8192
 INDEXES >
     idx_trace_id TraceId TYPE bloom_filter(0.001) GRANULARITY 1,
     idx_res_attr_key mapKeys(ResourceAttributes) TYPE bloom_filter(0.01) GRANULARITY 1,
-	idx_res_attr_value mapValues(ResourceAttributes) TYPE bloom_filter(0.01) GRANULARITY 1,
-	idx_scope_attr_key mapKeys(ScopeAttributes) TYPE bloom_filter(0.01) GRANULARITY 1,
-	idx_scope_attr_value mapValues(ScopeAttributes) TYPE bloom_filter(0.01) GRANULARITY 1,
-	idx_log_attr_key mapKeys(LogAttributes) TYPE bloom_filter(0.01) GRANULARITY 1,
-	idx_log_attr_value mapValues(LogAttributes) TYPE bloom_filter(0.01) GRANULARITY 1,
-	idx_body Body TYPE tokenbf_v1(32768, 3, 0) GRANULARITY 8
+    idx_res_attr_value mapValues(ResourceAttributes) TYPE bloom_filter(0.01) GRANULARITY 1,
+    idx_scope_attr_key mapKeys(ScopeAttributes) TYPE bloom_filter(0.01) GRANULARITY 1,
+    idx_scope_attr_value mapValues(ScopeAttributes) TYPE bloom_filter(0.01) GRANULARITY 1,
+    idx_log_attr_key mapKeys(LogAttributes) TYPE bloom_filter(0.01) GRANULARITY 1,
+    idx_log_attr_value mapValues(LogAttributes) TYPE bloom_filter(0.01) GRANULARITY 1,
+    idx_body Body TYPE tokenbf_v1(32768, 3, 0) GRANULARITY 8
