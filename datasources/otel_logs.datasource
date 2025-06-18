@@ -1,3 +1,5 @@
+TOKEN OTEL_TINYBIRD_TOKEN APPEND
+
 DESCRIPTION >
     This is a table that contains the logs from the OpenTelemetry Collector.
 
