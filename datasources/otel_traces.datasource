@@ -1,6 +1,8 @@
 TOKEN OTEL_TINYBIRD_TOKEN APPEND
+
 DESCRIPTION >
     A table that contains trace data from OpenTelemetry in Tinybird format.
+
 SCHEMA >
     `Timestamp` DateTime64(9) `json:$.start_time` CODEC(Delta(8), ZSTD(1)),
     `TraceId` String `json:$.trace_id` CODEC(ZSTD(1)),
@@ -24,11 +26,13 @@ SCHEMA >
     `LinksSpanId` Array(String) `json:$.links_span_id[:]` CODEC(ZSTD(1)),
     `LinksTraceState` Array(String) `json:$.links_trace_state[:]` CODEC(ZSTD(1)),
     `LinksAttributes` Array(Map(LowCardinality(String), String)) `json:$.links_attributes[:]` CODEC(ZSTD(1)),
+
 ENGINE "MergeTree"
 ENGINE_PARTITION_KEY "toDate(Timestamp)"
 ENGINE_SORTING_KEY "ServiceName, SpanName, toDateTime(Timestamp)"
 ENGINE_TTL "toDateTime(Timestamp) + toIntervalDay(7)"
 ENGINE_SETTINGS index_granularity=8192
+
 INDEXES >
     idx_trace_id TraceId TYPE bloom_filter(0.001) GRANULARITY 1,
     idx_res_attr_key mapKeys(ResourceAttributes) TYPE bloom_filter(0.01) GRANULARITY 1,

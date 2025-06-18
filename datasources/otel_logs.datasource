@@ -1,5 +1,6 @@
 DESCRIPTION >
     This is a table that contains the logs from the OpenTelemetry Collector.
+
 SCHEMA >
     `Timestamp` DateTime64(9) `json:$.timestamp` CODEC(Delta(8), ZSTD(1)),
 	`TimestampTime` DateTime `json:$.timestamp`,
@@ -17,11 +18,13 @@ SCHEMA >
     `ScopeVersion` String `json:$.scope_version` CODEC(ZSTD(1)),
     `ScopeAttributes` Map(LowCardinality(String), String) `json:$.scope_attributes` CODEC(ZSTD(1)),
     `LogAttributes` Map(LowCardinality(String), String) `json:$.log_attributes` CODEC(ZSTD(1))
+
 ENGINE "MergeTree"
 ENGINE_PARTITION_KEY "toDate(TimestampTime)"
 ENGINE_SORTING_KEY "ServiceName, TimestampTime, Timestamp"
 ENGINE_TTL "toDateTime(Timestamp) + toIntervalDay(3)"
 ENGINE_SETTINGS index_granularity=8192
+
 INDEXES >
     idx_trace_id TraceId TYPE bloom_filter(0.001) GRANULARITY 1,
     idx_res_attr_key mapKeys(ResourceAttributes) TYPE bloom_filter(0.01) GRANULARITY 1,
