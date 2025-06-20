@@ -1,4 +1,4 @@
-# Ingest from OpenTelemetry
+# Tinybird OpenTelemetry Template
 
 [OpenTelemetry](https://opentelemetry.io/) is an open-source observability framework for collecting, processing, and exporting telemetry data (metrics, traces, and logs) from your applications and infrastructure.
 
@@ -28,6 +28,14 @@ You can find the latest release of the Tinybird OpenTelemetry Collector here:
 ## Use the Tinybird OpenTelemetry project template
 
 To get started quickly, you can use the [Tinybird OpenTelemetry project template](https://github.com/tinybirdco/tinybird-otel-template). This template provides ready-to-use Data Sources and Pipes for storing and analyzing your telemetry data in Tinybird.
+
+```bash
+# select or create a new workspace
+tb login
+
+# deploy the template
+tb --cloud deploy --template https://github.com/tinybirdco/tinybird-otel-template/tree/main
+```
 
 ## Minimal OpenTelemetry Collector configuration
 
