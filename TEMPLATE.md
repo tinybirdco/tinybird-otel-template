@@ -1,6 +1,4 @@
-# Tinybird OpenTelemetry Template
-
-[OpenTelemetry](https://opentelemetry.io/) is an open-source observability framework for collecting, processing, and exporting telemetry data (metrics, traces, and logs) from your applications and infrastructure.
+The Tinybird OpenTelemetry Template lets you instrument your apps using your pre-existing OpenTelemetry data while leveraging Tinybird's real-time features.
 
 By integrating OpenTelemetry with Tinybird, you can analyze observability data in real time, build dashboards, and enrich it with other data sources.
 
@@ -14,20 +12,16 @@ Read on to learn how to send data from OpenTelemetry to Tinybird.
 
 ## Before you start
 
-Before you connect OpenTelemetry to Tinybird, ensure:
-
-* You have a Tinybird workspace.
-* You have a Tinybird Token with **append** permissions to the target Data Sources.
-* You are running the Tinybird distribution of the OpenTelemetry Collector.
+Before you connect OpenTelemetry to Tinybird, ensure you are running the Tinybird distribution of the OpenTelemetry Collector.
 
 You can find the latest release of the Tinybird OpenTelemetry Collector here:
 
 * [GitHub Releases](https://github.com/tinybirdco/opentelemetry-collector-contrib/releases)
 * [Docker Hub](https://hub.docker.com/r/tinybirdco/opentelemetry-collector-contrib/tags)
 
-## Use the Tinybird OpenTelemetry project template
+## Setup the template
 
-To get started quickly, you can use the [Tinybird OpenTelemetry project template](https://github.com/tinybirdco/tinybird-otel-template). This template provides ready-to-use Data Sources and Pipes for storing and analyzing your telemetry data in Tinybird.
+Fork the GitHub repository and deploy the data project to Tinybird.
 
 ```bash
 # select or create a new workspace
@@ -92,12 +86,3 @@ service:
 
 * `OTEL_TINYBIRD_API_HOST`: The API host for your Tinybird workspace (e.g., `https://api.tinybird.co`).
 * `OTEL_TINYBIRD_TOKEN`: A Tinybird token with **append** permissions to the target Data Sources (`otel_metrics`, `otel_traces`, `otel_logs`).
-
-You can create a token in the Tinybird UI under **Tokens**. Make sure it has the required append permissions for the Data Sources you want to ingest into.
-
-## Next steps
-
-* Explore and customize the [Tinybird OpenTelemetry project template](https://github.com/tinybirdco/tinybird-otel-template) to fit your needs.
-* Use the ingested data to build real-time analytics, dashboards, and alerts in Tinybird.
-
-For more details on the available configuration options, see the [Tinybird OpenTelemetry Collector documentation](https://github.com/tinybirdco/opentelemetry-collector-contrib).
