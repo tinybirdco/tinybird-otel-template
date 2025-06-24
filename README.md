@@ -34,7 +34,7 @@ To get started quickly, you can use the [Tinybird OpenTelemetry project template
 tb login
 
 # deploy the template
-tb --cloud deploy --template https://github.com/tinybirdco/tinybird-otel-template/tree/main
+tb --cloud deploy --template https://github.com/tinybirdco/tinybird-otel-template/tree/main/
 ```
 
 ## Minimal OpenTelemetry Collector configuration
