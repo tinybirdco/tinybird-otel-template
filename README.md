@@ -57,14 +57,15 @@ exporters:
   tinybird:
     endpoint: ${OTEL_TINYBIRD_API_HOST}
     token: ${OTEL_TINYBIRD_TOKEN}
-    metrics_sum:
-      datasource: otel_metrics_sum
-    metrics_histogram:
-      datasource: otel_metrics_histogram
-    metrics_exponential_histogram:
-      datasource: otel_metrics_exponential_histogram
-    metrics_gauge:
-      datasource: otel_metrics_gauge
+    metrics:
+      sum:
+        datasource: otel_metrics_sum
+      histogram:
+        datasource: otel_metrics_histogram
+      exponential_histogram:
+        datasource: otel_metrics_exponential_histogram
+      gauge:
+        datasource: otel_metrics_gauge
     traces: 
       datasource: otel_traces
     logs: 
