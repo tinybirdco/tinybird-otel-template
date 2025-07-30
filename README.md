@@ -18,12 +18,12 @@ Before you connect OpenTelemetry to Tinybird, ensure:
 
 * You have a Tinybird workspace.
 * You have a Tinybird Token with **append** permissions to the target Data Sources.
-* You are running the Tinybird distribution of the OpenTelemetry Collector.
+* You are running a release version of the OpenTelemetry Collector higher thaN release v0.131.0.
 
-You can find the latest release of the Tinybird OpenTelemetry Collector here:
-
-* [GitHub Releases](https://github.com/tinybirdco/opentelemetry-collector-contrib/releases)
-* [Docker Hub](https://hub.docker.com/r/tinybirdco/opentelemetry-collector-contrib/tags)
+- [GitHub Releases](https://github.com/open-telemetry/opentelemetry-collector-contrib/releases)
+- [Docker Hub](https://hub.docker.com/r/otel/opentelemetry-collector-contrib)
+> [!TIP]
+> The Tinybird OpenTelemetry Exporter is officially available in the OpenTelemetry Collector Contrib repository as of release v0.131.0. You can use the official OpenTelemetry Collector distributions that include the Tinybird exporter out of the box.
 
 ## Use the Tinybird OpenTelemetry project template
 
