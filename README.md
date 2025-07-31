@@ -22,8 +22,9 @@ Before you connect OpenTelemetry to Tinybird, ensure:
 
 - [GitHub Releases](https://github.com/open-telemetry/opentelemetry-collector-contrib/releases)
 - [Docker Hub](https://hub.docker.com/r/otel/opentelemetry-collector-contrib)
+
 > [!TIP]
-> The Tinybird OpenTelemetry Exporter is officially available in the OpenTelemetry Collector Contrib repository as of release v0.131.0. You can use the official OpenTelemetry Collector distributions that include the Tinybird exporter out of the box.
+> The Tinybird OpenTelemetry Exporter is officially available in the [OpenTelemetry Collector Contrib repository](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/tinybirdexporter) as of release v0.131.0. You can use the official OpenTelemetry Collector distributions that include the Tinybird exporter out of the box.
 
 ## Use the Tinybird OpenTelemetry project template
 
@@ -66,9 +67,9 @@ exporters:
         datasource: otel_metrics_exponential_histogram
       gauge:
         datasource: otel_metrics_gauge
-    traces: 
+    traces:
       datasource: otel_traces
-    logs: 
+    logs:
       datasource: otel_logs
 
 service:

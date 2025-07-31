@@ -1,4 +1,6 @@
-The Tinybird OpenTelemetry Template lets you instrument your apps using your pre-existing OpenTelemetry data while leveraging Tinybird's real-time features.
+# Tinybird OpenTelemetry Template
+
+[OpenTelemetry](https://opentelemetry.io/) is an open-source observability framework for collecting, processing, and exporting telemetry data (metrics, traces, and logs) from your applications and infrastructure.
 
 By integrating OpenTelemetry with Tinybird, you can analyze observability data in real time, build dashboards, and enrich it with other data sources.
 
@@ -12,16 +14,21 @@ Read on to learn how to send data from OpenTelemetry to Tinybird.
 
 ## Before you start
 
-Before you connect OpenTelemetry to Tinybird, ensure you are running the Tinybird distribution of the OpenTelemetry Collector.
+Before you connect OpenTelemetry to Tinybird, ensure:
 
-You can find the latest release of the Tinybird OpenTelemetry Collector here:
+* You have a Tinybird workspace.
+* You have a Tinybird Token with **append** permissions to the target Data Sources.
+* You are running a release version of the OpenTelemetry Collector higher than release v0.131.0.
 
-* [GitHub Releases](https://github.com/tinybirdco/opentelemetry-collector-contrib/releases)
-* [Docker Hub](https://hub.docker.com/r/tinybirdco/opentelemetry-collector-contrib/tags)
+- [GitHub Releases](https://github.com/open-telemetry/opentelemetry-collector-contrib/releases)
+- [Docker Hub](https://hub.docker.com/r/otel/opentelemetry-collector-contrib)
 
-## Setup the template
+> [!TIP]
+> The Tinybird OpenTelemetry Exporter is officially available in the [OpenTelemetry Collector Contrib repository](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/tinybirdexporter) as of release v0.131.0. You can use the official OpenTelemetry Collector distributions that include the Tinybird exporter out of the box.
 
-Fork the GitHub repository and deploy the data project to Tinybird.
+## Use the Tinybird OpenTelemetry project template
+
+To get started quickly, you can use the [Tinybird OpenTelemetry project template](https://github.com/tinybirdco/tinybird-otel-template). This template provides ready-to-use Data Sources and Pipes for storing and analyzing your telemetry data in Tinybird.
 
 ```bash
 # select or create a new workspace
@@ -60,9 +67,9 @@ exporters:
         datasource: otel_metrics_exponential_histogram
       gauge:
         datasource: otel_metrics_gauge
-    traces: 
+    traces:
       datasource: otel_traces
-    logs: 
+    logs:
       datasource: otel_logs
 
 service:
