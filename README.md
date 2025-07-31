@@ -95,8 +95,6 @@ service:
 * `OTEL_TINYBIRD_API_HOST`: The API host for your Tinybird workspace (e.g., `https://api.tinybird.co`).
 * `OTEL_TINYBIRD_TOKEN`: A Tinybird token with **append** permissions to the target Data Sources (`otel_metrics`, `otel_traces`, `otel_logs`).
 
-You can create a token in the Tinybird UI under **Tokens**. Make sure it has the required append permissions for the Data Sources you want to ingest into.
-
 ## Next steps
 
 * Explore and customize the [Tinybird OpenTelemetry project template](https://github.com/tinybirdco/tinybird-otel-template) to fit your needs.
