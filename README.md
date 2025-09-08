@@ -47,7 +47,9 @@ receivers:
   otlp:
     protocols:
       grpc:
+        endpoint: 0.0.0.0:4317
       http:
+        endpoint: 0.0.0.0:4318
 
 processors:
   batch:
@@ -56,8 +58,18 @@ processors:
 
 exporters:
   tinybird:
-    endpoint: ${OTEL_TINYBIRD_API_HOST}
-    token: ${OTEL_TINYBIRD_TOKEN}
+    endpoint: ${OTEL_TINYBIRD_API_HOST}         # Your Events API endpoint, e.g. https://api.us-east.aws.tinybird.co
+    token: ${OTEL_TINYBIRD_TOKEN}               # Token with append permissions
+    sending_queue:
+      enabled: true
+      queue_size: 104857600                # Total memory buffer in bytes (100 MB)
+      sizer: bytes
+      batch:
+        flush_timeout: 5s                  # Max wait time before flushing
+        min_size: 1024000                  # Min batch size: 1 MB
+        max_size: 8388608                  # Max batch size: 8 MB (Events API limit is 10 MB)
+    retry_on_failure:
+      enabled: true
     metrics:
       sum:
         datasource: otel_metrics_sum
@@ -67,10 +79,10 @@ exporters:
         datasource: otel_metrics_exponential_histogram
       gauge:
         datasource: otel_metrics_gauge
-    traces:
-      datasource: otel_traces
     logs:
       datasource: otel_logs
+    traces:
+      datasource: otel_traces
 
 service:
   pipelines:
