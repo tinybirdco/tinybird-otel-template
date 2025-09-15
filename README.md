@@ -6,6 +6,8 @@ Integrating Tinybird as an OpenTelemetry backend, you can analyze observability 
 
 Learn more about observability with Tinybird at https://www.tinybird.co/observability
 
+![](./opentelemetry.png)
+
 ## Set up the project
 
 Fork the GitHub repository and deploy the data project to Tinybird.
@@ -104,7 +106,7 @@ Make sure you are running a release version of the OpenTelemetry Collector highe
 
 You can connect your logs, traces and metrics in Tinybird to compatible visualization tools using the [ClickHouse HTTP interface](https://www.tinybird.co/docs/forward/work-with-data/publish-data/clickhouse-interface).
 
-Learn how to use [Grafana](https://www.tinybird.co/docs/forward/work-with-data/publish-data/guides/connect-grafana#configure-the-clickhouse-plugin-for-opentelemetry) to explore logs, traces and build alerts out of your metrics.
+Learn how to use [Grafana](https://www.tinybird.co/docs/forward/work-with-data/publish-data/guides/connect-grafana) to explore logs, traces and build alerts out of your metrics.
 
 ## opentelemetry-demo
 
