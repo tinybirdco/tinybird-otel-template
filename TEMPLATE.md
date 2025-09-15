@@ -1,5 +1,3 @@
-# Tinybird OpenTelemetry Template
-
 [OpenTelemetry](https://opentelemetry.io/) is an open-source observability framework for collecting, processing, and exporting telemetry data (metrics, traces, and logs) from your applications and infrastructure.
 
 Integrating Tinybird as an OpenTelemetry backend, you can analyze observability data in real time, build dashboards, and enrich it with other data sources.
