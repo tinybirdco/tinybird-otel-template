@@ -2,33 +2,13 @@
 
 [OpenTelemetry](https://opentelemetry.io/) is an open-source observability framework for collecting, processing, and exporting telemetry data (metrics, traces, and logs) from your applications and infrastructure.
 
-By integrating OpenTelemetry with Tinybird, you can analyze observability data in real time, build dashboards, and enrich it with other data sources.
+Integrating Tinybird as an OpenTelemetry backend, you can analyze observability data in real time, build dashboards, and enrich it with other data sources.
 
-Some common use cases for sending OpenTelemetry data to Tinybird include:
+Learn more about observability with Tinybird at https://www.tinybird.co/observability
 
-1. Centralizing metrics, traces, and logs for unified analytics.
-2. Building custom dashboards and alerts on top of observability data.
-3. Enriching telemetry with business or application data.
+## Set up the project
 
-Read on to learn how to send data from OpenTelemetry to Tinybird.
-
-## Before you start
-
-Before you connect OpenTelemetry to Tinybird, ensure:
-
-* You have a Tinybird workspace.
-* You have a Tinybird Token with **append** permissions to the target Data Sources.
-* You are running a release version of the OpenTelemetry Collector higher than release v0.131.0.
-
-- [GitHub Releases](https://github.com/open-telemetry/opentelemetry-collector-contrib/releases)
-- [Docker Hub](https://hub.docker.com/r/otel/opentelemetry-collector-contrib)
-
-> [!TIP]
-> The Tinybird OpenTelemetry Exporter is officially available in the [OpenTelemetry Collector Contrib repository](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/tinybirdexporter) as of release v0.131.0. You can use the official OpenTelemetry Collector distributions that include the Tinybird exporter out of the box.
-
-## Use the Tinybird OpenTelemetry project template
-
-To get started quickly, you can use the [Tinybird OpenTelemetry project template](https://github.com/tinybirdco/tinybird-otel-template). This template provides ready-to-use Data Sources and Pipes for storing and analyzing your telemetry data in Tinybird.
+Fork the GitHub repository and deploy the data project to Tinybird.
 
 ```bash
 # select or create a new workspace
@@ -36,11 +16,17 @@ tb login
 
 # deploy the template
 tb --cloud deploy --template https://github.com/tinybirdco/tinybird-otel-template/tree/main/
+
+# you'll need this token for the opentelemetry exporter configuration
+tb --cloud token copy OTEL_TINYBIRD_TOKEN
+
+# check your Tinybird API host needed for the opentelemetry exporter configuration
+tb info
 ```
 
-## Example OpenTelemetry Collector configuration
+## Send logs, metrics and traces
 
-Below is an example configuration for the Tinybird OpenTelemetry Collector to export metrics, traces, and logs to Tinybird:
+Paste the Tinybird OpenTelemetry `exporter` configuration into your OTel collector instance:
 
 ```yaml
 receivers:
@@ -102,14 +88,24 @@ service:
       exporters: [tinybird]
 ```
 
+> The Tinybird OpenTelemetry Exporter is officially available in the [OpenTelemetry Collector Contrib repository](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/tinybirdexporter) as of release v0.131.0. You can use the official OpenTelemetry Collector distributions that include the Tinybird exporter out of the box.
+
+Make sure you are running a release version of the OpenTelemetry Collector higher than release v0.131.0.
+
+- [GitHub Releases](https://github.com/open-telemetry/opentelemetry-collector-contrib/releases)
+- [Docker Hub](https://hub.docker.com/r/otel/opentelemetry-collector-contrib)
+
 ### Environment variables
 
-* `OTEL_TINYBIRD_API_HOST`: The API host for your Tinybird workspace (e.g., `https://api.tinybird.co`).
-* `OTEL_TINYBIRD_TOKEN`: A Tinybird token with **append** permissions to the target Data Sources (`otel_metrics`, `otel_traces`, `otel_logs`).
+* `OTEL_TINYBIRD_API_HOST`: The API host for your Tinybird workspace (e.g., `https://api.tinybird.co`). You can get it with `tb info`
+* `OTEL_TINYBIRD_TOKEN`: A Tinybird token with **append** permissions to the target Data Sources (`otel_metrics`, `otel_traces`, `otel_logs`). Grab yours with `tb --cloud token copy OTEL_TINYBIRD_TOKEN`
 
-## Next steps
+## Analyzing logs, traces and metrics with Grafana
 
-* Explore and customize the [Tinybird OpenTelemetry project template](https://github.com/tinybirdco/tinybird-otel-template) to fit your needs.
-* Use the ingested data to build real-time analytics, dashboards, and alerts in Tinybird.
+You can connect your logs, traces and metrics in Tinybird to compatible visualization tools using the [ClickHouse HTTP interface](https://www.tinybird.co/docs/forward/work-with-data/publish-data/clickhouse-interface).
 
-For more details on the available configuration options, see the [Tinybird OpenTelemetry Collector documentation](https://github.com/tinybirdco/opentelemetry-collector-contrib).
+Learn how to use [Grafana](https://www.tinybird.co/docs/forward/work-with-data/publish-data/guides/connect-grafana#configure-the-clickhouse-plugin-for-opentelemetry) to explore logs, traces and build alerts out of your metrics.
+
+# opentelemetry-demo
+
+Clone the [opentelemetry-demo](https://github.com/tinybirdco/opentelemetry-demo) repository for a quick demo on how to run the whole observability stack locally
