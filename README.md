@@ -92,7 +92,7 @@ service:
 
 > The Tinybird OpenTelemetry Exporter is officially available in the [OpenTelemetry Collector Contrib repository](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/tinybirdexporter) as of release v0.131.0. You can use the official OpenTelemetry Collector distributions that include the Tinybird exporter out of the box.
 
-Make sure you are running a release version of the OpenTelemetry Collector higher than release v0.131.0.
+Make sure you are running OpenTelemetry Collector Contrib v0.131.0 or later.
 
 - [GitHub Releases](https://github.com/open-telemetry/opentelemetry-collector-contrib/releases)
 - [Docker Hub](https://hub.docker.com/r/otel/opentelemetry-collector-contrib)
@@ -100,7 +100,17 @@ Make sure you are running a release version of the OpenTelemetry Collector highe
 ### Environment variables
 
 * `OTEL_TINYBIRD_API_HOST`: The API host for your Tinybird workspace (e.g., `https://api.tinybird.co`). You can get it with `tb info`
-* `OTEL_TINYBIRD_TOKEN`: A Tinybird token with **append** permissions to the target Data Sources (`otel_metrics`, `otel_traces`, `otel_logs`). Grab yours with `tb --cloud token copy OTEL_TINYBIRD_TOKEN`
+* `OTEL_TINYBIRD_TOKEN`: A Tinybird token with **append** permissions to the target Data Sources (`otel_traces`, `otel_logs`, and the `otel_metrics_*` Data Sources). Grab yours with `tb --cloud token copy OTEL_TINYBIRD_TOKEN`
+
+## Retention and endpoints
+
+All Data Sources keep 30 days of data through `ENGINE_TTL`. Change the interval in each `.datasource` file to fit your needs.
+
+The template publishes these endpoints:
+
+* `trace_details`: spans of one trace. Requires the `trace_id` parameter.
+* `recent_logs`: latest log lines.
+* `error_rate_by_service`: error rate per service.
 
 ## Analyzing logs, traces and metrics with Grafana
 

@@ -35,4 +35,6 @@ jobs:
       - name: Test project
         run: tb test run
       - name: Deployment check
+        # Skipped until TINYBIRD_HOST and TINYBIRD_TOKEN secrets are set
+        if: env.TINYBIRD_TOKEN != ''
         run: tb --cloud --host ${{ env.TINYBIRD_HOST }} --token ${{ env.TINYBIRD_TOKEN }} deploy --check

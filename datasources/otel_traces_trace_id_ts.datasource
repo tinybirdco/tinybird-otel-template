@@ -8,3 +8,4 @@ SCHEMA >
 
 ENGINE "MergeTree"
 ENGINE_SORTING_KEY "TraceId, toUnixTimestamp(Start)"
+ENGINE_TTL "toDateTime(Start) + INTERVAL 30 DAY"

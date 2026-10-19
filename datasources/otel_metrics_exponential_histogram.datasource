@@ -22,9 +22,9 @@ SCHEMA >
     `Scale` Int32 `json:$.scale` CODEC(ZSTD(1)),
     `ZeroCount` UInt64 `json:$.zero_count` CODEC(ZSTD(1)),
 	`PositiveOffset` Int32 `json:$.positive_offset` CODEC(ZSTD(1)),
-	`PositiveBucketCounts` Array(UInt64) `json:$.positive_bucket_counts[:]` CODEC(ZSTD(1)),
+	`PositiveBucketCounts` Array(UInt64) `json:$.positive_bucket_counts[:]` DEFAULT [] CODEC(ZSTD(1)),
 	`NegativeOffset` Int32 `json:$.negative_offset` CODEC(ZSTD(1)),
-	`NegativeBucketCounts` Array(UInt64) `json:$.negative_bucket_counts[:]` CODEC(ZSTD(1)),
+	`NegativeBucketCounts` Array(UInt64) `json:$.negative_bucket_counts[:]` DEFAULT [] CODEC(ZSTD(1)),
     `ExemplarsTraceId` Array(String) `json:$.exemplars_trace_id[:]` CODEC(ZSTD(1)),
     `ExemplarsSpanId` Array(String) `json:$.exemplars_span_id[:]` CODEC(ZSTD(1)),
     `ExemplarsTimestamp` Array(DateTime64(9)) `json:$.exemplars_timestamp[:]` CODEC(ZSTD(1)),
@@ -38,6 +38,7 @@ SCHEMA >
 ENGINE "MergeTree"
 ENGINE_PARTITION_KEY "toDate(TimeUnix)"
 ENGINE_SORTING_KEY "ServiceName, MetricName, Attributes, toUnixTimestamp64Nano(TimeUnix)"
+ENGINE_TTL "toDateTime(TimeUnix) + INTERVAL 30 DAY"
 ENGINE_SETTINGS index_granularity=8192
 
 INDEXES >
