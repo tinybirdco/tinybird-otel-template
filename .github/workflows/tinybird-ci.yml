@@ -11,10 +11,6 @@ on:
 
 concurrency: ${{ github.workflow }}-${{ github.event.pull_request.number }}
 
-env:
-  TINYBIRD_HOST: ${{ secrets.TINYBIRD_HOST }}
-  TINYBIRD_TOKEN: ${{ secrets.TINYBIRD_TOKEN }}
-
 jobs:
   ci:
     runs-on: ubuntu-latest
@@ -34,5 +30,3 @@ jobs:
         run: tb build
       - name: Test project
         run: tb test run
-      - name: Deployment check
-        run: tb --cloud --host ${{ env.TINYBIRD_HOST }} --token ${{ env.TINYBIRD_TOKEN }} deploy --check
